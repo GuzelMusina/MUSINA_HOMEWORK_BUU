@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.springframework.org/schema/beans">
+
+
+    <bean class="ru.itis.EconomicMajor" id="econom">
+        <constructor-arg value="Economic Faculty"/>
+        <constructor-arg value="Economy"/>
+        <constructor-arg value="4"/>
+        <property name="students">
+            <list>
+                <ref bean="bond"/>
+                <ref bean="vanya"/>
+            </list>
+        </property>
+        <property name="isFull" value="yes"/>
+    </bean>
+
+    <bean class="ru.itis.SoftawareEngenMajor" id="soften">
+        <constructor-arg value="Software Engineering"/>
+        <constructor-arg value="Engineering"/>
+        <constructor-arg value="5"/>
+        <property name="students">
+            <list>
+                <ref bean="peter"/>
+            </list>
+        </property>
+    </bean>
+
+    <!-- Constructor injection-->
+    <bean id="bond" class="ru.itis.StudentWithConstr">
+        <constructor-arg name="sno" value="007"/>
+        <constructor-arg name="sname" value="James Bond"/>
+        <constructor-arg name="major" ref="econom"/>
+    </bean>
+
+    <!-- Constructor injection -->
+    <bean class="ru.itis.StudentWithConstr" id="peter">
+        <constructor-arg name="sno" value="008"/>
+        <constructor-arg name="sname" value="Peter"/>
+        <constructor-arg name="major" ref="soften"/>
+    </bean>
+
+    <!--Setter injection -->
+    <bean id="vanya" class="ru.itis.StudentWithSetter">
+        <constructor-arg name="sno" value="006"/>
+        <constructor-arg name="sname" value="Vanya Hawkins"/>
+        <property name="major" ref="econom"/>
+    </bean>
+
+
+</beans>
